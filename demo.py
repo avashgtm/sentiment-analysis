@@ -19,8 +19,8 @@ tweets = api.search('nepal')
 with open('sentiment.csv', mode='w', encoding='utf-8') as sentiment_file:
     sentiment_writer = csv.writer(sentiment_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
-    sentiment_writer.writerow(['Polarity', 'Subjetivity', 'Tweet'])
+    sentiment_writer.writerow(['Sentiment','Polarity', 'Subjetivity', 'Tweet'])
     for tweet in tweets:
     	analysis = TextBlob(tweet.text)
-    	sentiment_writer.writerow([analysis.sentiment.polarity, analysis.sentiment.subjectivity, tweet.text])
+    	sentiment_writer.writerow(['positive' if analysis.sentiment.polarity >=0 else 'negative', analysis.sentiment.polarity, analysis.sentiment.subjectivity, tweet.text])
     
